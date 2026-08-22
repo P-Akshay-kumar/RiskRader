@@ -1,7 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
+import Link from "next/link";
 import { Radar, Menu, X, ArrowUpRight, Cpu } from "lucide-react";
+import { AuthControls } from "./AuthControls";
 
 interface NavbarProps {
   onOpenDemo: () => void;
@@ -71,22 +73,18 @@ export function Navbar({ onOpenDemo }: NavbarProps) {
           </nav>
 
           {/* Right Action Area */}
-          <div className="hidden lg:flex items-center gap-4">
-            {/* Live Engine Status Badge */}
-            <div className="flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-industrial-850 border border-industrial-700/80 text-xs font-mono text-industrial-200">
-              <span className="w-2.5 h-2.5 rounded-full bg-safety-emerald animate-ping" />
-              <Cpu className="w-3.5 h-3.5 text-safety-orange" />
-              <span>Rules + XGBoost Active</span>
-            </div>
+          <div className="hidden lg:flex items-center gap-3.5">
+            {/* Sleek RBAC & Auth Identity Control */}
+            <AuthControls />
 
             {/* CTA Button */}
-            <button
-              onClick={onOpenDemo}
-              className="relative group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-safety-orange to-safety-amber hover:opacity-95 text-white font-medium text-xs sm:text-sm shadow-lg shadow-safety-orange/20 transition-all active:scale-[0.98]"
+            <Link
+              href="/dashboard"
+              className="relative group inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-safety-orange to-safety-amber hover:opacity-95 text-white font-semibold text-xs sm:text-sm shadow-lg shadow-safety-orange/20 transition-all active:scale-[0.98]"
             >
-              <span>Explore Prototype</span>
+              <span>Explore Dashboard</span>
               <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
-            </button>
+            </Link>
           </div>
 
           {/* Mobile Hamburger Button */}

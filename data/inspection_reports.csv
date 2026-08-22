@@ -1,0 +1,20 @@
+asset_id,inspection_date,finding_severity,notes
+1,2024-01-20,low,Minor surface rust on casing paint
+1,2024-05-15,high,Significant mechanical seal weeping and thermal discoloration
+1,2024-08-01,high,Severe bearing vibration audible during full load operation
+2,2024-02-20,none,Normal operating conditions
+2,2024-06-15,medium,Elevated housing temperature detected by infrared camera
+3,2024-03-01,low,Minor packing gland dripping
+3,2024-07-12,none,Stroke travel within nominal limits
+4,2024-01-10,medium,Fouling observed on reboiler shell inlet
+4,2024-04-05,high,Severe tube wall thinning detected via eddy current audit
+5,2024-02-15,low,Coupling guard bolt loose
+5,2024-06-02,medium,Thermal imaging shows 18C delta over ambient on motor DE bearing
+6,2024-03-25,none,No cracking observed on shell weld seams
+6,2024-07-20,high,Severe stress corrosion cracking near nozzle N-2
+7,2024-01-30,low,Chain tension slightly slack
+7,2024-05-18,high,Gearbox tooth pitting and metallic debris in lube oil audit
+8,2024-02-05,none,Flare pilot flame steady
+8,2024-06-30,high,Emergency isolation valve packing binding during drop test
+9,2024-04-02,medium,Lube oil acidity slightly elevated
+10,2024-03-18,none,Blower fan blades clean and balanced

@@ -1,0 +1,60 @@
+import logging
+from contextlib import asynccontextmanager
+from fastapi import FastAPI
+from fastapi.middleware.cors import CORSMiddleware
+
+from api.config import settings
+from api.db import init_db
+from api.routers import health, assets, risk, upload, leads
+
+# Configure logging
+logging.basicConfig(
+    level=settings.LOG_LEVEL,
+    format="%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+)
+logger = logging.getLogger(__name__)
+
+@asynccontextmanager
+async def lifespan(app: FastAPI):
+    """Lifespan context manager handling startup & shutdown procedures"""
+    logger.info("Initializing RiskRadar API server...")
+    try:
+        await init_db()
+    except Exception as e:
+        logger.warning(f"Database table initialization warning: {e}")
+    yield
+    logger.info("Shutting down RiskRadar API server...")
+
+app = FastAPI(
+    title=settings.PROJECT_NAME,
+    version=settings.VERSION,
+    description="RiskRadar Industrial Safety Risk Intelligence FastAPI Backend",
+    lifespan=lifespan
+)
+
+# Configure CORS for Vercel Frontend & Local Dev
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=settings.cors_origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
+
+# Register API Routers
+app.include_router(health.router)
+app.include_router(assets.router)
+app.include_router(risk.router)
+app.include_router(upload.router)
+app.include_router(leads.router)
+
+@app.get("/")
+async def root():
+    """Root endpoint returning API status overview"""
+    return {
+        "name": settings.PROJECT_NAME,
+        "version": settings.VERSION,
+        "environment": settings.ENVIRONMENT,
+        "docs_url": "/docs",
+        "health_check": "/health"
+    }

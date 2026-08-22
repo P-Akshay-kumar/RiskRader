@@ -1,0 +1,8 @@
+asset_id,incident_date,incident_type,severity
+1,2023-09-12,Bearing Thermal Trip,High
+1,2024-07-10,Mechanical Lockup,Critical
+2,2023-11-04,High Vibration Alarm Trip,Medium
+4,2024-04-05,Tube Bundle Relief Valve Blow,Critical
+6,2024-06-22,Flange Gas Leak Emergency Shutoff,Critical
+7,2024-05-18,Gearbox Lockup,High
+8,2024-07-02,Flare Valve Stem Jam,High

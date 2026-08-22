@@ -44,10 +44,10 @@ export function ProblemSection() {
             <ShieldAlert className="w-4 h-4" />
             THE CORE PROBLEM &bull; CHECK EVERYTHING &rarr; CHECK WHAT MATTERS FIRST
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold font-display text-industrial-50 tracking-tight leading-tight">
+          <h2 className="text-4xl sm:text-6xl font-bold font-display text-white tracking-tight leading-tight">
             Industrial Risk Data Is Scattered <span className="text-safety-orange">Across Silos.</span>
           </h2>
-          <p className="text-base sm:text-xl text-industrial-200 leading-relaxed font-sans">
+          <p className="text-lg sm:text-2xl text-industrial-100 leading-relaxed font-sans max-w-4xl">
             Plant managers and safety engineers struggle to synthesize maintenance logs, physical inspection reports, telemetry streams, and compliance audits into a single actionable risk priority queue.
           </p>
         </div>

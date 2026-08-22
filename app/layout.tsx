@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Space_Grotesk } from "next/font/google";
+import { ClerkProvider } from "@clerk/nextjs";
 import "./globals.css";
 
 const inter = Inter({
@@ -41,11 +42,20 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  return (
+  const pubKey = process.env.NEXT_PUBLIC_CLERK_PUBLISHABLE_KEY;
+  const hasValidClerkKey = Boolean(pubKey && pubKey.startsWith("pk_") && !pubKey.includes("pk_test_demo"));
+
+  const content = (
     <html lang="en" className={`dark ${inter.variable} ${spaceGrotesk.variable}`}>
       <body className="min-h-screen bg-industrial-900 text-industrial-50 antialiased selection:bg-safety-orange selection:text-white">
         {children}
       </body>
     </html>
   );
+
+  if (hasValidClerkKey) {
+    return <ClerkProvider>{content}</ClerkProvider>;
+  }
+
+  return content;
 }

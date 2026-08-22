@@ -1,6 +1,7 @@
 "use client";
 
 import React from "react";
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight, Sparkles, Lock, ShieldCheck, Code2 } from "lucide-react";
 
@@ -37,13 +38,13 @@ export function CtaBanner({ onOpenDemo }: CtaBannerProps) {
 
             {/* Direct Action Buttons (Priority 38) */}
             <div className="pt-4 flex flex-col sm:flex-row items-center justify-center gap-4">
-              <button
-                onClick={onOpenDemo}
+              <Link
+                href="/dashboard"
                 className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-8 py-4 rounded-xl bg-gradient-to-r from-safety-orange to-safety-amber hover:opacity-95 text-white font-semibold text-base shadow-xl shadow-safety-orange/25 transition-all active:scale-[0.98]"
               >
-                <span>Try the Demo</span>
+                <span>Launch Dashboard</span>
                 <ArrowRight className="w-5 h-5" />
-              </button>
+              </Link>
 
               <a
                 href="#tech-stack"

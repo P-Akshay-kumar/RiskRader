@@ -30,10 +30,10 @@ export function SolutionSection() {
             <Layers className="w-4 h-4" />
             DUAL-ENGINE ARCHITECTURE
           </div>
-          <h2 className="text-3xl sm:text-5xl font-bold font-display text-industrial-50 tracking-tight">
+          <h2 className="text-4xl sm:text-6xl font-extrabold font-display text-white tracking-tight">
             How RiskRadar Works: <span className="text-gradient-orange">Rules + XGBoost + RAG Grounding</span>
           </h2>
-          <p className="text-base sm:text-xl text-industrial-200 font-sans leading-relaxed">
+          <p className="text-lg sm:text-2xl text-industrial-100 font-sans leading-relaxed max-w-4xl mx-auto">
             Combines the mathematical certainty of physical rule boundaries, the pattern-learning power of XGBoost, and retrieval-augmented SOP evidence grounding.
           </p>
         </div>

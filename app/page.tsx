@@ -11,8 +11,10 @@ import { WhyDifferentSection } from "@/components/WhyDifferentSection";
 import { InteractiveSimulator } from "@/components/InteractiveSimulator";
 import { TechStackSection } from "@/components/TechStackSection";
 import { CtaBanner } from "@/components/CtaBanner";
+import { LeadCaptureSection } from "@/components/LeadCaptureSection";
 import { Footer } from "@/components/Footer";
 import { DemoModal } from "@/components/DemoModal";
+import { WhatsAppButton } from "@/components/WhatsAppButton";
 
 export default function Home() {
   const [isDemoOpen, setIsDemoOpen] = useState(false);
@@ -25,7 +27,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-industrial-950 text-industrial-50 flex flex-col font-sans selection:bg-safety-orange selection:text-white">
+    <div className="min-h-screen bg-industrial-950 text-industrial-50 flex flex-col font-sans selection:bg-safety-orange selection:text-white relative">
       {/* Navigation */}
       <Navbar onOpenDemo={() => setIsDemoOpen(true)} />
 
@@ -58,7 +60,10 @@ export default function Home() {
         {/* 8. Technical Stack, Feasibility MVP & Mitigation Matrix */}
         <TechStackSection />
 
-        {/* 9. Call-To-Action Banner */}
+        {/* 9. On-Page Lead Capture Form */}
+        <LeadCaptureSection />
+
+        {/* 10. Call-To-Action Banner */}
         <CtaBanner onOpenDemo={() => setIsDemoOpen(true)} />
       </main>
 
@@ -70,6 +75,9 @@ export default function Home() {
         isOpen={isDemoOpen}
         onClose={() => setIsDemoOpen(false)}
       />
+
+      {/* Floating WhatsApp Button */}
+      <WhatsAppButton />
     </div>
   );
 }
