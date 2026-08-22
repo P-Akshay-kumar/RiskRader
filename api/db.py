@@ -35,6 +35,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 async def init_db() -> None:
     """Async database table bootstrap helper & column migration runner"""
+    # Import all models to register tables on Base.metadata
+    from api.models import organization, asset, risk_score, audit_log, alert, auth_event, lead, dataset_upload, asset_feature
+
     async with engine.begin() as conn:
         logger.info("Initializing database schema tables...")
         await conn.run_sync(Base.metadata.create_all)
