@@ -1,0 +1,79 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  :root {
+    --font-inter: var(--font-inter, 'Inter', sans-serif);
+    --font-space-grotesk: var(--font-space-grotesk, 'Space Grotesk', sans-serif);
+  }
+
+  body {
+    background-color: #090D16;
+    color: #F8FAFC;
+    font-family: var(--font-inter);
+    overflow-x: hidden;
+    scrollbar-width: thin;
+    scrollbar-color: #1F2E4A #090D16;
+  }
+}
+
+/* Custom Industrial Glow Effects */
+.glow-orange {
+  box-shadow: 0 0 35px -5px rgba(255, 107, 0, 0.35);
+}
+
+.glow-orange-sm {
+  box-shadow: 0 0 15px -3px rgba(255, 107, 0, 0.25);
+}
+
+.glow-amber {
+  box-shadow: 0 0 30px -5px rgba(245, 158, 11, 0.3);
+}
+
+.text-gradient-orange {
+  background: linear-gradient(135deg, #FFF 0%, #FF6B00 60%, #F59E0B 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.text-gradient-silver {
+  background: linear-gradient(180deg, #FFFFFF 0%, #94A3B8 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+}
+
+.grid-bg-overlay {
+  background-size: 32px 32px;
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+}
+
+.dots-bg-overlay {
+  background-image: radial-gradient(rgba(255, 107, 0, 0.12) 1px, transparent 1px);
+  background-size: 24px 24px;
+}
+
+/* Webkit Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #090D16;
+}
+::-webkit-scrollbar-thumb {
+  background: #1F2E4A;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #FF6B00;
+}
