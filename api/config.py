@@ -21,9 +21,13 @@ class Settings(BaseSettings):
         if isinstance(v, str):
             # Fix standard Neon postgresql:// to asyncpg Driver format postgresql+asyncpg://
             if v.startswith("postgresql://"):
-                return v.replace("postgresql://", "postgresql+asyncpg://", 1)
+                v = v.replace("postgresql://", "postgresql+asyncpg://", 1)
             elif v.startswith("postgres://"):
-                return v.replace("postgres://", "postgresql+asyncpg://", 1)
+                v = v.replace("postgres://", "postgresql+asyncpg://", 1)
+            
+            # Convert sslmode query parameter to ssl for asyncpg compatibility
+            if "sslmode=" in v:
+                v = v.replace("sslmode=require", "ssl=require").replace("sslmode=prefer", "ssl=prefer").replace("sslmode=disable", "ssl=disable")
         return v
 
     @property
