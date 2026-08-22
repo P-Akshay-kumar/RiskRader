@@ -9,6 +9,7 @@ import { WorkflowSection } from "@/components/WorkflowSection";
 import { FeaturesSection } from "@/components/FeaturesSection";
 import { WhyDifferentSection } from "@/components/WhyDifferentSection";
 import { InteractiveSimulator } from "@/components/InteractiveSimulator";
+import { TechStackSection } from "@/components/TechStackSection";
 import { CtaBanner } from "@/components/CtaBanner";
 import { Footer } from "@/components/Footer";
 import { DemoModal } from "@/components/DemoModal";
@@ -28,7 +29,7 @@ export default function Home() {
       {/* Navigation */}
       <Navbar onOpenDemo={() => setIsDemoOpen(true)} />
 
-      {/* Main Sections in Required Order */}
+      {/* Main Sections in Aligned Order */}
       <main className="flex-1">
         {/* 1. Hero Section */}
         <Hero
@@ -39,22 +40,25 @@ export default function Home() {
         {/* 2. The Problem */}
         <ProblemSection />
 
-        {/* 3. The Solution / Dual Engine Architecture */}
+        {/* 3. Dual-Engine Architecture (Rules + XGBoost + RAG Additive Layer) */}
         <SolutionSection />
 
-        {/* 4. How It Solves The Problem (5-step Workflow) */}
+        {/* 4. 5-Step Pipeline + Risk x Consequence Matrix */}
         <WorkflowSection />
 
-        {/* 5. Features Grid */}
+        {/* 5. Features Grid (Designed for Industrial Safety Decisions) */}
         <FeaturesSection />
 
-        {/* 6. Why It's Different (Comparison Matrix) */}
+        {/* 6. Side-by-Side Defensible Comparison Table */}
         <WhyDifferentSection />
 
-        {/* 7. Live Interactive Risk Simulator */}
+        {/* 7. Interactive Risk Engine Sandbox (Prototype Demo) */}
         <InteractiveSimulator />
 
-        {/* 8. Call-To-Action Banner */}
+        {/* 8. Technical Stack, Feasibility MVP & Mitigation Matrix */}
+        <TechStackSection />
+
+        {/* 9. Call-To-Action Banner */}
         <CtaBanner onOpenDemo={() => setIsDemoOpen(true)} />
       </main>
 

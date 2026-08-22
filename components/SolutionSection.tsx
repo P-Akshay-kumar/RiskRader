@@ -6,18 +6,17 @@ import {
   Cpu,
   BookOpenCheck,
   ShieldCheck,
-  Zap,
   Layers,
-  Sparkles,
   ArrowRight,
   Database,
-  Search,
   CheckCircle2,
-  FileText,
+  Lock,
+  Sparkles,
+  GitBranch,
 } from "lucide-react";
 
 export function SolutionSection() {
-  const [activeTab, setActiveTab] = useState<"hybrid" | "rag">("hybrid");
+  const [activeTab, setActiveTab] = useState<"hybrid" | "rag" | "additive">("hybrid");
 
   return (
     <section id="solution" className="py-24 bg-industrial-950 border-t border-industrial-800 relative overflow-hidden">
@@ -27,48 +26,59 @@ export function SolutionSection() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
         {/* Section Header */}
         <div className="text-center max-w-3xl mx-auto space-y-4">
-          <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full bg-industrial-900 border border-safety-orange/30 text-xs font-mono text-safety-orange">
-            <Layers className="w-3.5 h-3.5" />
-            THE DUAL-ENGINE ARCHITECTURE
+          <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-industrial-900 border border-safety-orange/40 text-xs sm:text-sm font-mono text-safety-orange">
+            <Layers className="w-4 h-4" />
+            DUAL-ENGINE ARCHITECTURE
           </div>
           <h2 className="text-3xl sm:text-5xl font-bold font-display text-industrial-50 tracking-tight">
-            How RiskRadar Works: <span className="text-gradient-orange">Hybrid Precision + RAG Clarity</span>
+            How RiskRadar Works: <span className="text-gradient-orange">Rules + XGBoost + RAG Grounding</span>
           </h2>
-          <p className="text-base sm:text-lg text-industrial-300 font-sans leading-relaxed">
-            Generic LLMs invent advice. Static alarm rules miss subtle anomalies. RiskRadar combines the absolute reliability of deterministic rules with retrieval-augmented intelligence grounded strictly in your plant&apos;s physical safety procedures.
+          <p className="text-base sm:text-xl text-industrial-200 font-sans leading-relaxed">
+            Combines the mathematical certainty of physical rule boundaries, the pattern-learning power of XGBoost, and retrieval-augmented SOP evidence grounding.
           </p>
         </div>
 
         {/* Interactive Architecture Tab Selector */}
-        <div className="mt-12 max-w-4xl mx-auto flex justify-center p-1.5 rounded-2xl bg-industrial-900 border border-industrial-800">
+        <div className="mt-12 max-w-5xl mx-auto flex flex-col sm:flex-row justify-center p-2 rounded-2xl bg-industrial-900 border border-industrial-800 gap-2">
           <button
             onClick={() => setActiveTab("hybrid")}
-            className={`flex-1 py-3 px-6 rounded-xl font-display font-medium text-sm transition-all flex items-center justify-center gap-2.5 ${
+            className={`flex-1 py-3.5 px-6 rounded-xl font-display font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2.5 ${
               activeTab === "hybrid"
-                ? "bg-gradient-to-r from-safety-orange to-safety-amber text-white shadow-lg shadow-safety-orange/20"
-                : "text-industrial-400 hover:text-industrial-100"
+                ? "bg-gradient-to-r from-safety-orange to-safety-amber text-white shadow-lg shadow-safety-orange/20 font-bold"
+                : "text-industrial-300 hover:text-industrial-50"
             }`}
           >
-            <Cpu className="w-4 h-4" />
-            <span>Layer 1: Hybrid Rule + ML Scoring</span>
+            <Cpu className="w-4.5 h-4.5" />
+            <span>Layer 1: Rules + XGBoost</span>
           </button>
           <button
             onClick={() => setActiveTab("rag")}
-            className={`flex-1 py-3 px-6 rounded-xl font-display font-medium text-sm transition-all flex items-center justify-center gap-2.5 ${
+            className={`flex-1 py-3.5 px-6 rounded-xl font-display font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2.5 ${
               activeTab === "rag"
-                ? "bg-gradient-to-r from-safety-orange to-safety-amber text-white shadow-lg shadow-safety-orange/20"
-                : "text-industrial-400 hover:text-industrial-100"
+                ? "bg-gradient-to-r from-safety-orange to-safety-amber text-white shadow-lg shadow-safety-orange/20 font-bold"
+                : "text-industrial-300 hover:text-industrial-50"
             }`}
           >
-            <BookOpenCheck className="w-4 h-4" />
-            <span>Layer 2: RAG Grounded Explanations</span>
+            <BookOpenCheck className="w-4.5 h-4.5" />
+            <span>Layer 2: RAG SOP Evidence</span>
+          </button>
+          <button
+            onClick={() => setActiveTab("additive")}
+            className={`flex-1 py-3.5 px-6 rounded-xl font-display font-medium text-xs sm:text-sm transition-all flex items-center justify-center gap-2.5 ${
+              activeTab === "additive"
+                ? "bg-gradient-to-r from-safety-orange to-safety-amber text-white shadow-lg shadow-safety-orange/20 font-bold"
+                : "text-industrial-300 hover:text-industrial-50"
+            }`}
+          >
+            <GitBranch className="w-4.5 h-4.5" />
+            <span>Additive Layer Design</span>
           </button>
         </div>
 
         {/* Dynamic Tab Content Display */}
         <div className="mt-8 max-w-5xl mx-auto">
           <AnimatePresence mode="wait">
-            {activeTab === "hybrid" ? (
+            {activeTab === "hybrid" && (
               <motion.div
                 key="hybrid-tab"
                 initial={{ opacity: 0, y: 15 }}
@@ -79,73 +89,75 @@ export function SolutionSection() {
               >
                 {/* Left Text Explanation */}
                 <div className="lg:col-span-7 space-y-5">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-industrial-950 border border-industrial-700 font-mono text-xs text-safety-orange">
-                    DETERMINISTIC SAFETY SCORES
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-industrial-950 border border-industrial-700 font-mono text-xs text-safety-orange font-semibold">
+                    DETERMINISTIC & ML HYBRID
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold font-display text-industrial-50">
-                    Rule-Based Safety Guardrails Meets Machine Learning Anomaly Detection
+                    Deterministic Safety Guardrails Meets XGBoost Risk Classification
                   </h3>
-                  <p className="text-sm text-industrial-300 leading-relaxed font-sans">
-                    Safety regulations cannot depend on probability alone. RiskRadar enforces hard deterministic thresholds for critical safety parameters (e.g. pressure caps, temperature limits, gas PPM), while an ensemble ML classifier analyzes continuous multivariate sensor telemetry to catch complex micro-anomalies weeks before physical breakdown.
+                  <p className="text-sm sm:text-base text-industrial-200 leading-relaxed font-sans">
+                    Safety boundaries cannot rely on probability alone. RiskRadar enforces hard deterministic thresholds for critical physical limits (pressure, temperature, valve state), while an XGBoost classifier analyzes multivariate sensor telemetry and maintenance history to detect degrading asset conditions.
                   </p>
 
-                  <div className="space-y-3 pt-2">
+                  <div className="space-y-3.5 pt-2">
                     <div className="flex items-start gap-3">
                       <div className="p-1 rounded bg-safety-emerald/10 text-safety-emerald mt-0.5">
-                        <CheckCircle2 className="w-4 h-4" />
+                        <CheckCircle2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-industrial-100">0% Hallucination Risk Scoring</h4>
-                        <p className="text-xs text-industrial-400">Hard mathematical bounds prevent false safety clearances.</p>
+                        <h4 className="text-base font-semibold text-industrial-100">Deterministic Threshold Boundaries</h4>
+                        <p className="text-xs sm:text-sm text-industrial-300">Hard rules enforce physical safety limits with zero ambiguity.</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                       <div className="p-1 rounded bg-safety-emerald/10 text-safety-emerald mt-0.5">
-                        <CheckCircle2 className="w-4 h-4" />
+                        <CheckCircle2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-industrial-100">Multi-Signal Telemetry Fusion</h4>
-                        <p className="text-xs text-industrial-400">Fuses SCADA feeds, vibration spectral FFT, and maintenance interval delays.</p>
+                        <h4 className="text-base font-semibold text-industrial-100">XGBoost Degradation Classifier</h4>
+                        <p className="text-xs sm:text-sm text-industrial-300">Learns complex degradation patterns across telemetry, inspection, and maintenance history.</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Right Visual Architecture Box */}
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-industrial-950 border border-industrial-800 space-y-4">
-                  <div className="text-xs font-mono text-industrial-400 uppercase tracking-wider mb-2">
+                <div className="lg:col-span-5 p-6 rounded-2xl bg-industrial-950 border border-industrial-800 space-y-4 shadow-xl">
+                  <div className="text-xs font-mono text-industrial-300 uppercase tracking-wider font-semibold">
                     // HYBRID ENGINE PIPELINE
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-industrial-900 border border-industrial-800 flex items-center justify-between">
+                  <div className="p-4 rounded-xl bg-industrial-900 border border-industrial-800 flex items-center justify-between">
                     <div className="flex items-center gap-3">
                       <Database className="w-5 h-5 text-safety-cyan" />
                       <div>
-                        <div className="text-xs font-mono text-industrial-200">Continuous Ingestion</div>
-                        <div className="text-[10px] text-industrial-400">Sensors, Logs, ERP</div>
+                        <div className="text-xs font-mono text-industrial-100 font-bold">Multi-Source Data Ingestion</div>
+                        <div className="text-xs text-industrial-400">Maintenance, Inspection, SCADA</div>
                       </div>
                     </div>
-                    <span className="text-xs font-mono text-safety-cyan">1,420 Hz</span>
+                    <span className="text-xs font-mono text-safety-cyan font-bold">Fused Data</span>
                   </div>
 
                   <div className="flex justify-center my-1">
-                    <ArrowRight className="w-4 h-4 text-industrial-600 rotate-90" />
+                    <ArrowRight className="w-4 h-4 text-industrial-500 rotate-90" />
                   </div>
 
-                  <div className="p-3.5 rounded-xl bg-industrial-900 border border-safety-orange/40 flex items-center justify-between shadow-lg shadow-safety-orange/5">
+                  <div className="p-4 rounded-xl bg-industrial-900 border border-safety-orange/40 flex items-center justify-between shadow-lg shadow-safety-orange/10">
                     <div className="flex items-center gap-3">
                       <Cpu className="w-5 h-5 text-safety-orange" />
                       <div>
-                        <div className="text-xs font-mono text-industrial-100 font-semibold">Dual Engine Scoring</div>
-                        <div className="text-[10px] text-industrial-400">Hard Rules + XGBoost Model</div>
+                        <div className="text-xs font-mono text-industrial-50 font-bold">Dual Engine Scoring</div>
+                        <div className="text-xs text-industrial-300">Rules + XGBoost Model</div>
                       </div>
                     </div>
                     <span className="text-xs font-mono text-safety-orange font-bold">0-100 Score</span>
                   </div>
                 </div>
               </motion.div>
-            ) : (
+            )}
+
+            {activeTab === "rag" && (
               <motion.div
                 key="rag-tab"
                 initial={{ opacity: 0, y: 15 }}
@@ -156,54 +168,98 @@ export function SolutionSection() {
               >
                 {/* Left Text Explanation */}
                 <div className="lg:col-span-7 space-y-5">
-                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded bg-industrial-950 border border-industrial-700 font-mono text-xs text-safety-amber">
-                    RETRIEVAL-AUGMENTED GENERATION (RAG)
+                  <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-industrial-950 border border-industrial-700 font-mono text-xs text-safety-amber font-semibold">
+                    RAG-GROUNDED SAFETY DECISIONS
                   </div>
                   <h3 className="text-2xl sm:text-3xl font-bold font-display text-industrial-50">
-                    Cites Real Plant Standard Operating Procedures (SOPs), Not Invented Text
+                    Cites Real Plant Standard Operating Procedures (SOPs) & OEM Manuals
                   </h3>
-                  <p className="text-sm text-industrial-300 leading-relaxed font-sans">
-                    When RiskRadar flags an asset, it doesn&apos;t just spit out a raw number. Its RAG layer retrieves exact clauses from your plant&apos;s internal safety manuals, OEM equipment guidelines, and OSHA compliance standards — handing your plant engineers immediate, verified resolution steps.
+                  <p className="text-sm sm:text-base text-industrial-200 leading-relaxed font-sans">
+                    When RiskRadar flags an asset, it retrieves exact relevant passages from your plant&apos;s internal SOPs, equipment manuals, and safety guidelines — providing engineers with grounded, actionable resolution steps.
                   </p>
 
-                  <div className="space-y-3 pt-2">
+                  <div className="space-y-3.5 pt-2">
                     <div className="flex items-start gap-3">
                       <div className="p-1 rounded bg-safety-emerald/10 text-safety-emerald mt-0.5">
-                        <CheckCircle2 className="w-4 h-4" />
+                        <CheckCircle2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-industrial-100">Exact SOP & OSHA Citation</h4>
-                        <p className="text-xs text-industrial-400">Links directly to document section, page number, and procedural clause.</p>
+                        <h4 className="text-base font-semibold text-industrial-100">Exact SOP & Manual Document Retrieval</h4>
+                        <p className="text-xs sm:text-sm text-industrial-300">Retrieves specific procedural clauses from ChromaDB vector index.</p>
                       </div>
                     </div>
 
                     <div className="flex items-start gap-3">
                       <div className="p-1 rounded bg-safety-emerald/10 text-safety-emerald mt-0.5">
-                        <CheckCircle2 className="w-4 h-4" />
+                        <CheckCircle2 className="w-5 h-5" />
                       </div>
                       <div>
-                        <h4 className="text-sm font-semibold text-industrial-100">Auditable Explanation Trail</h4>
-                        <p className="text-xs text-industrial-400">Every alert explanation is stored with cryptographic vector lineage for compliance.</p>
+                        <h4 className="text-base font-semibold text-industrial-100">Traceable Explanation Trail</h4>
+                        <p className="text-xs sm:text-sm text-industrial-300">Every recommendation records the retrieved source document for full auditability.</p>
                       </div>
                     </div>
                   </div>
                 </div>
 
                 {/* Right Visual RAG Vector Citation Box */}
-                <div className="lg:col-span-5 p-6 rounded-2xl bg-industrial-950 border border-industrial-800 space-y-3">
-                  <div className="text-xs font-mono text-industrial-400 uppercase tracking-wider mb-1">
-                    // RAG VECTOR GROUNDING PREVIEW
+                <div className="lg:col-span-5 p-6 rounded-2xl bg-industrial-950 border border-industrial-800 space-y-4 shadow-xl">
+                  <div className="text-xs font-mono text-industrial-300 uppercase tracking-wider font-semibold">
+                    // RAG VECTOR EVIDENCE PREVIEW
                   </div>
 
-                  <div className="p-3 rounded-xl bg-industrial-900 border border-industrial-800 text-xs font-mono">
-                    <div className="text-industrial-400 text-[10px]">RETRIEVED VECTOR CHUNK #402</div>
-                    <div className="text-safety-amber font-semibold mt-1">&quot;SOP-702 Section 4.1: Pump Cavitation Emergency Relief&quot;</div>
+                  <div className="p-4 rounded-xl bg-industrial-900 border border-industrial-800 text-xs font-mono">
+                    <div className="text-industrial-400 text-xs font-semibold">RETRIEVED DOCUMENT EVIDENCE:</div>
+                    <div className="text-safety-amber font-semibold mt-1 text-sm">&quot;SOP-402 Section 3.2: High-Pressure Bearing Cavitation Relief&quot;</div>
                   </div>
 
-                  <div className="p-3 rounded-xl bg-industrial-900 border border-safety-emerald/30 text-xs font-mono">
-                    <div className="text-safety-emerald text-[10px] font-bold">VERIFIED RECOMMENDED ACTION</div>
-                    <div className="text-industrial-100 mt-1">1. Reduce intake manifold valve flow by 15%.</div>
-                    <div className="text-industrial-100">2. Engage aux coolant loop within 30 min.</div>
+                  <div className="p-4 rounded-xl bg-industrial-900 border border-safety-emerald/30 text-xs font-mono">
+                    <div className="text-safety-emerald text-xs font-bold">RECOMMENDED ACTION</div>
+                    <div className="text-industrial-100 mt-1 text-xs sm:text-sm leading-relaxed">
+                      Trigger immediate seal cooling & isolate secondary bypass valve.
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            )}
+
+            {activeTab === "additive" && (
+              <motion.div
+                key="additive-tab"
+                initial={{ opacity: 0, y: 15 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -15 }}
+                transition={{ duration: 0.3 }}
+                className="p-8 sm:p-10 rounded-3xl bg-industrial-900 border border-industrial-700/80 shadow-2xl space-y-6"
+              >
+                <div className="inline-flex items-center gap-2 px-3.5 py-1 rounded bg-industrial-950 border border-industrial-700 font-mono text-xs text-safety-cyan font-semibold">
+                  PRIORITY 45 &bull; SAFETY-FIRST DESIGN
+                </div>
+
+                <h3 className="text-2xl sm:text-3xl font-bold font-display text-industrial-50">
+                  RAG is an Additive Layer — Core Risk Scoring Operates Independently
+                </h3>
+
+                <p className="text-base sm:text-lg text-industrial-200 leading-relaxed font-sans">
+                  The core Rules + XGBoost risk engine operates independently of the generative AI layer. RAG enhances the system with evidence-grounded explanations and recommendations without becoming the sole source of safety decisions.
+                </p>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-2">
+                  <div className="p-5 rounded-2xl bg-industrial-950 border border-industrial-800 space-y-2">
+                    <div className="flex items-center gap-2 text-safety-emerald text-sm font-bold font-mono">
+                      <ShieldCheck className="w-5 h-5" /> Independent Risk Engine
+                    </div>
+                    <p className="text-xs sm:text-sm text-industrial-300 leading-relaxed">
+                      If the RAG LLM service is offline or unavailable, the deterministic rules and XGBoost risk model continue scoring asset risk and calculating priority uninterrupted.
+                    </p>
+                  </div>
+
+                  <div className="p-5 rounded-2xl bg-industrial-950 border border-industrial-800 space-y-2">
+                    <div className="flex items-center gap-2 text-safety-cyan text-sm font-bold font-mono">
+                      <Sparkles className="w-5 h-5" /> Grounded Evidence Enrichment
+                    </div>
+                    <p className="text-xs sm:text-sm text-industrial-300 leading-relaxed">
+                      When available, RAG fetches verified SOP text and generates clear recommendations, ensuring zero reliance on ungrounded AI generation.
+                    </p>
                   </div>
                 </div>
               </motion.div>
