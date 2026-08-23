@@ -2,7 +2,7 @@ import logging
 from typing import AsyncGenerator
 from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker, AsyncSession
 from api.config import settings
-from api.models import Base
+from api.models import Base, Organization, Asset, RiskScore, AuditLog, Alert, AssetFeature, AuthEvent, DatasetUpload, Lead
 
 logger = logging.getLogger(__name__)
 
@@ -35,30 +35,9 @@ async def get_db() -> AsyncGenerator[AsyncSession, None]:
 
 async def init_db() -> None:
     """Async database table bootstrap helper & column migration runner"""
-    # Import all models to register tables on Base.metadata
-    from api.models import organization, asset, risk_score, audit_log, alert, auth_event, lead, dataset_upload, asset_feature
-
     async with engine.begin() as conn:
-        logger.info("Initializing database schema tables...")
-        try:
-            await conn.run_sync(Base.metadata.create_all)
-        except Exception as e:
-            logger.warning(f"Base.metadata.create_all warning: {e}")
-            from sqlalchemy import text
-            ddl_statements = [
-                "CREATE TABLE IF NOT EXISTS organizations (id SERIAL PRIMARY KEY, name VARCHAR(255) NOT NULL, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-                "CREATE TABLE IF NOT EXISTS assets (id SERIAL PRIMARY KEY, organization_id INTEGER DEFAULT 1, name VARCHAR(255) NOT NULL, asset_type VARCHAR(100) NOT NULL, location VARCHAR(255) NOT NULL, consequence_score INTEGER DEFAULT 3, created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-                "CREATE TABLE IF NOT EXISTS risk_scores (id SERIAL PRIMARY KEY, organization_id INTEGER DEFAULT 1, asset_id INTEGER, rule_score DOUBLE PRECISION DEFAULT 0.0, ml_score DOUBLE PRECISION DEFAULT 0.0, fused_score DOUBLE PRECISION DEFAULT 0.0, risk_band VARCHAR(50) DEFAULT 'low', user_id VARCHAR(100), role VARCHAR(50), computed_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-                "CREATE TABLE IF NOT EXISTS alerts (id SERIAL PRIMARY KEY, organization_id INTEGER DEFAULT 1, asset_id INTEGER, alert_level VARCHAR(50) NOT NULL, message TEXT NOT NULL, acknowledged BOOLEAN DEFAULT FALSE, user_id VARCHAR(100), role VARCHAR(50), created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-                "CREATE TABLE IF NOT EXISTS audit_log (id SERIAL PRIMARY KEY, organization_id INTEGER DEFAULT 1, asset_id INTEGER, input_data_snapshot JSONB, score_breakdown JSONB, user_id VARCHAR(100), role VARCHAR(50), previous_hash VARCHAR(64), hash VARCHAR(64), created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-                "CREATE TABLE IF NOT EXISTS auth_events (id SERIAL PRIMARY KEY, organization_id INTEGER DEFAULT 1, user_id VARCHAR(100) NOT NULL, email VARCHAR(255), event_type VARCHAR(50) NOT NULL, ip_address VARCHAR(50), created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);",
-                "CREATE TABLE IF NOT EXISTS leads (id SERIAL PRIMARY KEY, full_name VARCHAR(255) NOT NULL, work_email VARCHAR(255) NOT NULL, phone_number VARCHAR(50), company_name VARCHAR(255), job_title VARCHAR(100), facility_type VARCHAR(100), company_size VARCHAR(50), current_process VARCHAR(100), use_case_notes TEXT, status VARCHAR(50) DEFAULT 'new', created_at TIMESTAMP WITH TIME ZONE DEFAULT CURRENT_TIMESTAMP);"
-            ]
-            for stmt in ddl_statements:
-                try:
-                    await conn.execute(text(stmt))
-                except Exception as stmt_err:
-                    logger.warning(f"DDL statement warning: {stmt_err}")
+        logger.info("Initializing database schema tables on Neon Postgres...")
+        await conn.run_sync(Base.metadata.create_all)
 
         # Migration: Safely add user_id, role, organization_id, previous_hash, and hash columns if missing
         for table in ["assets", "risk_scores", "alerts", "audit_log", "auth_events"]:
@@ -86,7 +65,6 @@ async def init_db() -> None:
     # Seed Default Organization #1
     try:
         async with AsyncSessionLocal() as session:
-            from api.models.organization import Organization
             from sqlalchemy import select
             res = await session.execute(select(Organization).where(Organization.id == 1))
             org = res.scalar_one_or_none()
