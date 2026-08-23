@@ -23,3 +23,5 @@ services:
         value: "+15550192837"
       - key: ENVIRONMENT
         value: production
+      - key: PYTHON_VERSION
+        value: 3.11.9
