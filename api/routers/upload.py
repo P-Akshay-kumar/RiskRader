@@ -24,7 +24,7 @@ from src.rag_explain import generate_explanation
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1", tags=["upload"])
+router = APIRouter(tags=["upload"])
 
 REQUIRED_COLUMNS = [
     "asset_id",

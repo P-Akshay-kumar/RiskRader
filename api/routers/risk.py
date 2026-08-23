@@ -30,7 +30,7 @@ from src.rag_explain import generate_explanation
 from src.orchestrate import run_full_pipeline
 
 logger = logging.getLogger(__name__)
-router = APIRouter(prefix="/api/v1", tags=["Risk Intelligence Pipeline"])
+router = APIRouter(tags=["Risk Intelligence Pipeline"])
 
 @router.post("/pipeline/run", status_code=status.HTTP_200_OK)
 async def run_pipeline_endpoint(

@@ -42,27 +42,19 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.middleware("http")
-async def rewrite_api_v1_prefix(request, call_next):
-    """Transparently route legacy non-prefixed endpoints (e.g. /risk/ranked) to /api/v1/..."""
-    path = request.url.path
-    if not path.startswith("/api/v1") and path not in ["/", "/docs", "/openapi.json", "/redoc"]:
-        request.scope["path"] = f"/api/v1{path}"
-    return await call_next(request)
+# Register API Routers under /api/v1 prefix
+app.include_router(health.router, prefix="/api/v1")
+app.include_router(assets.router, prefix="/api/v1")
+app.include_router(risk.router, prefix="/api/v1")
+app.include_router(upload.router, prefix="/api/v1")
+app.include_router(leads.router, prefix="/api/v1")
 
-# Register API Routers under /api/v1
+# Also register API Routers under root / for direct compatibility (/risk/ranked, /alerts, /risk/features, /upload/dataset)
 app.include_router(health.router)
 app.include_router(assets.router)
 app.include_router(risk.router)
 app.include_router(upload.router)
 app.include_router(leads.router)
-
-# Also mount risk router endpoints under root / for legacy compatibility (/risk/ranked, /alerts, /risk/features)
-from fastapi import APIRouter
-legacy_risk_router = APIRouter(tags=["Legacy Aliases"])
-for route in risk.router.routes:
-    legacy_risk_router.routes.append(route)
-app.include_router(legacy_risk_router)
 
 @app.api_route("/", methods=["GET", "HEAD"])
 async def root():

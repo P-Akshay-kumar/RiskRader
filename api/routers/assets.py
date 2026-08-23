@@ -7,7 +7,7 @@ from api.db import get_db
 from api.models.asset import Asset
 from api.schemas.asset import AssetCreate, AssetUpdate, AssetResponse
 
-router = APIRouter(prefix="/api/v1/assets", tags=["Assets"])
+router = APIRouter(prefix="/assets", tags=["Assets"])
 
 @router.get("", response_model=List[AssetResponse])
 async def list_assets(

@@ -18,7 +18,7 @@ from api.models.lead import Lead
 
 logger = logging.getLogger(__name__)
 
-router = APIRouter(prefix="/api/v1", tags=["leads"])
+router = APIRouter(prefix="/leads", tags=["leads"])
 
 # Simple in-memory IP rate limiting (max 5 requests per 10 minutes)
 _IP_SUBMISSION_HISTORY: Dict[str, List[float]] = {}
