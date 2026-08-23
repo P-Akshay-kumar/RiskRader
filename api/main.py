@@ -42,6 +42,14 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+@app.middleware("http")
+async def rewrite_api_v1_prefix(request, call_next):
+    """Transparently route legacy non-prefixed endpoints (e.g. /risk/ranked) to /api/v1/..."""
+    path = request.url.path
+    if not path.startswith("/api/v1") and path not in ["/", "/docs", "/openapi.json", "/redoc"]:
+        request.scope["path"] = f"/api/v1{path}"
+    return await call_next(request)
+
 # Register API Routers
 app.include_router(health.router)
 app.include_router(assets.router)
