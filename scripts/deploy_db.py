@@ -19,10 +19,10 @@ from api.models.lead import Lead
 async def apply_rls_policies():
     """Enforces Postgres Row-Level Security (RLS) policies for multi-tenancy on Neon Postgres"""
     print("Applying Postgres Row-Level Security (RLS) policies...")
-    async with engine.begin() as conn:
-        tables = ["assets", "risk_scores", "alerts", "audit_log", "auth_events"]
-        for table in tables:
-            try:
+    tables = ["assets", "risk_scores", "alerts", "audit_log", "auth_events"]
+    for table in tables:
+        try:
+            async with engine.begin() as conn:
                 # Enable RLS on table
                 await conn.execute(text(f"ALTER TABLE {table} ENABLE ROW LEVEL SECURITY;"))
                 # Drop existing policy if any
@@ -33,8 +33,8 @@ async def apply_rls_policies():
                     f"FOR ALL USING (organization_id = NULLIF(current_setting('app.current_organization_id', true), '')::integer);"
                 ))
                 print(f"  ✓ Applied RLS policy on table: {table}")
-            except Exception as e:
-                print(f"  ℹ Note on RLS for {table}: {e}")
+        except Exception as e:
+            print(f"  ℹ Note on RLS for {table}: {e}")
 
 async def deploy():
     print("==========================================================================")
