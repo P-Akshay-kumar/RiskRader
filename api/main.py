@@ -50,12 +50,27 @@ async def rewrite_api_v1_prefix(request, call_next):
         request.scope["path"] = f"/api/v1{path}"
     return await call_next(request)
 
-# Register API Routers
+# Register API Routers under /api/v1
 app.include_router(health.router)
 app.include_router(assets.router)
 app.include_router(risk.router)
 app.include_router(upload.router)
 app.include_router(leads.router)
+
+# Register dual-alias routes without /api/v1 prefix for legacy compatibility
+for r in [health.router, assets.router, risk.router, upload.router, leads.router]:
+    for route in r.routes:
+        if hasattr(route, "path") and route.path.startswith("/api/v1"):
+            clean_path = route.path.replace("/api/v1", "", 1)
+            if clean_path and clean_path != "/":
+                app.add_api_route(
+                    path=clean_path,
+                    endpoint=route.endpoint,
+                    methods=route.methods,
+                    status_code=getattr(route, "status_code", 200),
+                    tags=getattr(route, "tags", None),
+                    dependencies=getattr(route, "dependencies", None)
+                )
 
 @app.api_route("/", methods=["GET", "HEAD"])
 async def root():
