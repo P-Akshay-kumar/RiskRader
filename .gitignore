@@ -2,6 +2,15 @@
 /node_modules
 /.pnp
 .pnp.js
+venv/
+env/
+
+# Python & ML artifacts
+__pycache__/
+*.pyc
+chroma_db/
+*.db
+*.sqlite3
 
 # Testing
 /coverage

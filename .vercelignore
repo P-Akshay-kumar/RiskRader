@@ -1,0 +1,18 @@
+# Exclude Python backend, ML models, vector databases, and test suites from Next.js Vercel bundle
+api/
+src/
+models/
+data/
+chroma_db/
+knowledge_base/
+scripts/
+tests/
+venv/
+.env*
+*.db
+*.sqlite3
+*.py
+*.pyc
+__pycache__/
+DEPLOYMENT.md
+INTEGRATION_CHECKLIST.md
