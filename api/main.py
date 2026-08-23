@@ -49,13 +49,13 @@ app.include_router(risk.router)
 app.include_router(upload.router)
 app.include_router(leads.router)
 
-@app.get("/")
+@app.api_route("/", methods=["GET", "HEAD"])
 async def root():
-    """Root endpoint returning API status overview"""
+    """Root endpoint returning API status overview (supports GET & HEAD for Render health checks)"""
     return {
         "name": settings.PROJECT_NAME,
         "version": settings.VERSION,
         "environment": settings.ENVIRONMENT,
         "docs_url": "/docs",
-        "health_check": "/health"
+        "health_check": "/api/v1/health"
     }
