@@ -9,8 +9,8 @@ Welcome to the official deployment and operations manual for **RiskRadar**—an 
 | Service Layer | Cloud Provider | Production URL |
 | :--- | :--- | :--- |
 | **Frontend Web Application** | Vercel | `https://risk-rader.vercel.app` |
-| **FastAPI Backend Services** | Render (Free Web Service) | `https://riskradar-backend.onrender.com` |
-| **Health Check & DB Ping** | Render | `https://riskradar-backend.onrender.com/api/v1/health` |
+| **FastAPI Backend Services** | Render (Free Web Service) | `https://riskradar-backend-er3u.onrender.com` |
+| **Health Check & DB Ping** | Render | `https://riskradar-backend-er3u.onrender.com/api/v1/health` |
 | **Database Server** | Neon Postgres (Serverless) | `ep-sample-neon.eastus2.aws.neon.tech` |
 | **Source Code Repository** | GitHub | `https://github.com/P-Akshay-kumar/RiskRader.git` |
 

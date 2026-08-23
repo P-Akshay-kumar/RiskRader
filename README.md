@@ -11,8 +11,8 @@ For complete step-by-step instructions on Neon Postgres provisioning, Render Web
 | Service Layer | Provider | Live URL |
 | :--- | :--- | :--- |
 | **Frontend App** | Vercel | `https://risk-rader.vercel.app` |
-| **FastAPI Backend** | Render | `https://riskradar-backend.onrender.com` |
-| **Health API** | Render | `https://riskradar-backend.onrender.com/api/v1/health` |
+| **FastAPI Backend** | Render | `https://riskradar-backend-er3u.onrender.com` |
+| **Health API** | Render | `https://riskradar-backend-er3u.onrender.com/api/v1/health` |
 | **GitHub Repo** | GitHub | `https://github.com/P-Akshay-kumar/RiskRader.git` |
 
 ---
